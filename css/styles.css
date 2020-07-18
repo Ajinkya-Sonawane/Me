@@ -1,0 +1,100 @@
+/************************** TAG Selectors **************************/
+body{
+    background-color:honeydew;
+    font-family: 'Nanum Gothic',Helvetica,Arial,  sans-serif;
+    text-align: center;
+}
+
+h1{
+    font-size: 4em;
+}
+
+hr{
+    border-style: none;
+    border-top-style: dotted;
+    border-color: darkcyan;
+    width: 5%;
+    border-width: 8px;
+}
+/************************** CSS Selectors **************************/
+
+.displaypic{
+    border-radius: 15px;
+    margin: 2px auto;
+    padding: 10px;    
+}
+
+.icons-attribute{
+    font-size: 0.8em;
+}
+
+.img-code{
+    float: left;
+    margin-top: 20px;
+    margin-right: 40px;
+    padding: 25px 0;
+}
+
+.img-management{
+    float: right;
+    margin-right: 20px;
+    padding: 25px 0;
+}
+
+.img-work{
+    display: inline-block;
+}
+
+.intro-container{
+    text-align: center;
+    padding: 50px;
+}
+
+.intro-text{
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+.marginTop{
+    margin-top: 5px !important;
+}
+
+.middle-container div{
+    padding: 30px;
+}
+
+.no-link-decoration{
+    text-decoration: none;
+    color: blueviolet;
+}
+
+.nomargin{
+    margin: 0;
+}
+
+.profile{
+    width: 50%;
+    margin: auto;
+}
+
+.skill-row{
+    width: 50%;
+    margin: auto;
+    text-align: left;
+}
+
+.social{
+    padding: 30px;
+}
+
+.social-link{
+    text-decoration: none;
+    padding: 5px;
+}
+
+.zoom:hover {
+    transform: scale(1.3);
+  }
