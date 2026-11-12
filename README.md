@@ -7,3 +7,4 @@ Static HTML/CSS, no build step. Open `index.html` locally or serve the repo with
 - `index.html` - page content
 - `css/styles.css` - styles (light and dark mode)
 - `files/AjinkyaSonawane_CV.pdf` - downloadable resume
+- `AGENTS.md` - machine-readable portfolio for AI agents (also viewable via the Page / AGENTS.md toggle, or `index.html#agents`)

@@ -13,10 +13,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="alternate" type="text/markdown" href="AGENTS.md" title="AGENTS.md (for AI agents)">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <main class="page">
+    <div class="view-toggle" role="group" aria-label="View format">
+        <button type="button" data-view="page" aria-pressed="true">Page</button>
+        <button type="button" data-view="agents" aria-pressed="false">AGENTS.md</button>
+    </div>
+
+    <section id="agents-view" class="page agents" hidden>
+        <div class="agents-bar">
+            <span>AGENTS.md · plain Markdown for AI agents</span>
+            <span>
+                <button type="button" class="btn tonal small" id="copy-md">Copy</button>
+                <a class="btn outlined small" href="AGENTS.md" target="_blank" rel="noopener">Raw</a>
+            </span>
+        </div>
+        <pre id="agents-md">Loading AGENTS.md...</pre>
+    </section>
+
+    <main class="page" id="page-view">
         <header class="hero">
             <img src="images/avatar.jpg" class="avatar" width="120" height="120" alt="Ajinkya Sonawane">
             <h1>Ajinkya Sonawane</h1>
@@ -89,8 +106,8 @@
                     <p>Runs the Jenkins compile and unit-test pipeline locally on Windows/WSL, macOS and Apple Silicon.</p>
                 </div>
                 <div class="card tint-2">
-                    <h3>Sabha of Hastinapur</h3>
-                    <p>Side project: a Mahabharata-inspired social-deduction party game for phones, in progress.</p>
+                    <h3><a href="https://kurusabha.in/" target="_blank" rel="noopener">Sabha of Hastinapur</a></h3>
+                    <p>Side project: a Mahabharata-inspired social-deduction party game for phones. Play it at <a href="https://kurusabha.in/" target="_blank" rel="noopener">kurusabha.in</a>.</p>
                 </div>
                 <div class="card tint-1">
                     <h3>Earlier open source</h3>
@@ -125,5 +142,47 @@
 
         <footer>© 2026 Ajinkya Sonawane</footer>
     </main>
+
+    <script>
+    (function () {
+        var buttons = document.querySelectorAll('.view-toggle button');
+        var pageView = document.getElementById('page-view');
+        var agentsView = document.getElementById('agents-view');
+        var pre = document.getElementById('agents-md');
+        var loaded = false;
+
+        function load() {
+            if (loaded) return;
+            loaded = true;
+            fetch('AGENTS.md')
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+                .then(function (t) { pre.textContent = t; })
+                .catch(function () {
+                    loaded = false;
+                    pre.textContent = 'Could not load AGENTS.md here. Open it directly: AGENTS.md';
+                });
+        }
+
+        function show(view) {
+            var agents = view === 'agents';
+            pageView.hidden = agents;
+            agentsView.hidden = !agents;
+            buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === view)); });
+            if (agents) load();
+            history.replaceState(null, '', agents ? '#agents' : location.pathname + location.search);
+            window.scrollTo(0, 0);
+        }
+
+        buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.view); }); });
+        document.getElementById('copy-md').addEventListener('click', function (e) {
+            var btn = e.currentTarget;
+            navigator.clipboard.writeText(pre.textContent).then(function () {
+                btn.textContent = 'Copied';
+                setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+            });
+        });
+        if (location.hash === '#agents') show('agents');
+    })();
+    </script>
 </body>
 </html>
